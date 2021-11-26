@@ -117,4 +117,59 @@ public class SinglyLinkedListTest {
         // Then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testGet() {
+        // Given
+        SinglyLinkedList<String> linkedList = new SinglyLinkedList<String>();
+        String expected = "bird";
+
+        // When
+        linkedList.add("cat");
+        linkedList.add("dog");
+        linkedList.add("bird");
+
+        String actual = linkedList.get(2);
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCopy() {
+        // Given
+        SinglyLinkedList<String> linkedList = new SinglyLinkedList<String>();
+
+        // When
+        linkedList.add("cat");
+        linkedList.add("dog");
+        linkedList.add("bird");
+
+        SinglyLinkedList<String> newList = linkedList.copy();
+        String expected = linkedList.toString();
+        String actual = newList.toString();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testSort() {
+        // Given
+        SinglyLinkedList<Integer> linkedList = new SinglyLinkedList<Integer>();
+        String expected = "12345";
+
+        // When
+        linkedList.add(5);
+        linkedList.add(3);
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(4);
+
+        linkedList.sort();
+        String actual = linkedList.toString();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
 }
