@@ -25,6 +25,8 @@ public class SinglyLinkedList<Element extends Comparable<Element>> {
         Element getData() {
             return this.data;
         }
+
+        void setData(Element data) { this.data = data; }
     }
 
     private Node head;
@@ -132,42 +134,28 @@ public class SinglyLinkedList<Element extends Comparable<Element>> {
     }
 
     public void sort() {
-        Node currNode = this.head.getNextNode();
-        Node prevNode = this.head;
-        Node temp;
+        Node currNode = this.head;
+        Node nextNode;
             /*
             Comparable returns:
                 -1  - object is < specified object
                 0   - object is = specified object
                 1   - object is > specified object
              */
-        for (int i = 0; i < size; i++) {
-            for (int j = 1; j < size; j++) {
-                System.out.println("outer loop " + i + ", inner loop " + j + ": " + currNode.getData() + " " + prevNode.getData());
-                if (prevNode.getData().compareTo(currNode.getData()) > 0) {
-                    // 5->4->3->2->1->null
-                    // prev = 5->
-                    // curr = 4->
-                    temp = currNode; // 4->
-                    prevNode.next = currNode.next; // prev.next = ->4; curr.next = ->3
-                    temp.next = prevNode; // temp.next = ->3 changes to ->5
-                    currNode = prevNode;
-                    prevNode = temp;
 
-                    if (j == 1) {
-                        this.head = temp;
-                        System.out.println(this.head.getData());
-                    }
+        for(int i = 0; i < size; i++){
+            while(currNode.getNextNode() != null){
+                nextNode = currNode.getNextNode();
+                if(currNode.getData().compareTo(nextNode.getData()) > 0){
+                    Element tmp = currNode.getData();
+                    currNode.setData((nextNode.getData()));
+                    nextNode.setData(tmp);
                 }
                 currNode = currNode.getNextNode();
-                prevNode = prevNode.getNextNode();
             }
-            if (i == 0) {
-                this.tail = currNode;
-            }
-            currNode = this.head.getNextNode();
-            prevNode = this.head;
+            currNode = this.head;
         }
+
     }
 
     public String toString() {
